@@ -10,4 +10,3 @@ crapsbets = [50, 70, 30, 40, 50]
 Craps.SimulateGame(crapsguesses, crapsbets)
 Craps.SimulateGame(crapsguesses, crapsbets)
 
-

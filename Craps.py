@@ -57,7 +57,7 @@ def RollTheDices(ba, gn, boolist):
         outcome1 = [casino_wins, players_lose]
         print(outcome1)
     else:
-        print('We have ' + str(numwin) + ' winners')
+        print('We have ' + str(numwin) + ' winner(s)')
         casino_wins = []
         player_wilo = []
         for i in range(0, len(ba)):
