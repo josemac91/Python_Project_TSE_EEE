@@ -1,16 +1,5 @@
 import random
 random.seed(3456)
-roulette_tables=2
-craps_tables=2
-barmen=1
-bartender_wage = 200
-casinostartcash=50000
-ncust=10
-pctreturn=0.5
-pctbach=0.1
-pctnew=0.4
-freebudget=200
-
 
 class Customer(object):
     def __init__(self, name):
@@ -139,4 +128,3 @@ class Bachelor(Customer):
     def customer_exp(self):
         return 'Bachelor'
 """
-
