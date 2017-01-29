@@ -1,5 +1,5 @@
 import random
-import Craps
+import craps
 
 
 #Defining the class of customer
@@ -29,9 +29,8 @@ class New(Customer):
 class Bachelor(Customer):
     @property
     def assignchips(self):
-        chips = random.randint(200, 500)
+        chips = random.randint(200,500)
         return(chips)
-
 #Creates a list of players with the number of players set earlier
 def CreatePlayers(nplayers):
     playerlist = []
@@ -46,7 +45,7 @@ def PlayerType(listofplayers, probreturn, probbach):
     #Generates a random number for each player that is the basis for the type
     #Creates a list of types (R,B,or N). Also alters the input to have class involved
     for i in range(0, len(listofplayers)):
-        rando = random.randint(1, 100)
+        rando = random.randint(1,100)
 
         if rando <= rnumb:
             listofplayers[i] = Returner(str(listofplayers[i]))
@@ -62,17 +61,16 @@ def PlayerType(listofplayers, probreturn, probbach):
 #Returns a list
 def PlayerChips(listofplayers, typesofplayers, bachelorbudget):
     cashcash = []
-    for i in range(0, len(listofplayers)):
+    for i in range(0,len(listofplayers)):
         if typesofplayers[i]=="B":
             cashcash.append(listofplayers[i].assignchips+bachelorbudget)
         else:
             cashcash.append(listofplayers[i].assignchips)
     return(cashcash)
-
 #Roulette minimum bets list
-RMinchoices = [50, 100, 200]
+RMinchoices = [50,100,200]
 #Craps minimum bets list
-CMinchoices = [0, 25, 50]
+CMinchoices = [0,25,50]
 
 #Selects a table based on the number of tables for each game and the choice of the players
 def ChooseATable(roulettetables, crapstables, actions):
@@ -126,16 +124,16 @@ def CasinoSimulation(nights, pnumber, casinoday1cash, nbartend, nroulette, ncrap
         #This will help make sure that the customers purchase drinks around five times
         roundsbetweendrinks = actionspernight/5
         #Loop run each round determining if the customer orders drinks or not
-        for i in range(0, len(plist)):
+        for i in range(0,len(plist)):
             #In this case, it is between 1 and 4
-            drinkornot = random.randint(1, roundsbetweendrinks)
+            drinkornot = random.randint(1,roundsbetweendrinks)
             #There is a 25% chance that the player purchases a drink so if the random number is four, they will order
             if drinkornot==4 and PlayerMoney[i] > 60:
                 #The player orders one or two drinks
-                numofdrinks = random.randint(1, 2)
+                numofdrinks = random.randint(1,2)
                 purchaseddrinks += numofdrinks
                 #The tip is anything from zero to twenty
-                tip = random.randint(0, 20)
+                tip = random.randint(0,20)
                 #The cost of the drink without the tip is twenty times the number of drinks
                 drinkcost = 20*numofdrinks
                 #Casino gets the cost of the drink but not the tip
@@ -149,7 +147,7 @@ def CasinoSimulation(nights, pnumber, casinoday1cash, nbartend, nroulette, ncrap
                 purchaseddrinks += 0
 
             #Determines the current action for each player from the previous list of choices
-            currentaction = [random.choice(choice) for i in range(0, len(plist))]
+            currentaction = [random.choice(choice) for i in range (0, len(plist))]
             #Which table the player goes to
             tablechoice = ChooseATable(nroulette, ncraps, currentaction)
 
@@ -170,7 +168,7 @@ def CasinoSimulation(nights, pnumber, casinoday1cash, nbartend, nroulette, ncrap
                         rwager.append(Rminbet)
                 #New players bet anywhere between zero to one third of their budget
                 elif playertypes[i]=="N":
-                    Rnewbwagerpct = random.uniform(0, (1/3))
+                    Rnewbwagerpct = random.uniform(0,(1/3))
                     rwager.append(int(PlayerMoney[i]*Rnewbwagerpct))
                 #This is for bachelors. They bet anything between 0 and their total budget
                 else:
@@ -203,17 +201,17 @@ def CasinoSimulation(nights, pnumber, casinoday1cash, nbartend, nroulette, ncrap
                     cguess.append(1)
                 #Roulette guesses are between 0 and 36. Craps guess is out of range since you can't play both
                 elif currentaction[i]=="Roulette":
-                    rguess.append(random.randint(0, 36))
+                    rguess.append(random.randint(0,36))
                     cguess.append(1)
                 #For craps, they can't bet on roulette so the guess is automatically wrong
                 #The guess is between 2-12
                 else:
                     rguess.append(37)
-                    cguess.append(random.randint(2, 12))
+                    cguess.append(random.randint(2,12))
             #For each table, we randomly generate the correct number for roulette
             Rcorrectnumber = []
-            for i in range(0, nroulette):
-                Rcorrectnumber.append(random.randint(0, 36))
+            for i in range(0,nroulette):
+                Rcorrectnumber.append(random.randint(0,36))
             #Money changes from roulette
             Rplayermoneychanges = []
             Rcasinomoneychanges = []
@@ -237,16 +235,16 @@ def CasinoSimulation(nights, pnumber, casinoday1cash, nbartend, nroulette, ncrap
             #Same thing for craps now with the correct number list
             Ccorrectnumber = []
             #Generates the number by picking two random numbers between 1 and 6 that are summed
-            for i in range(0, ncraps):
-                dicerolled = random.randint(1, 6) + random.randint(1, 6)
+            for i in range(0,ncraps):
+                dicerolled = random.randint(1,6) + random.randint(1,6)
                 Ccorrectnumber.append(dicerolled)
             #The money changes for craps, which works the same way as the roulette money changes did
             Cplayermoneychanges = []
             Ccasinomoneychanges = []
             for i in range(0, len(cguess)):
                 if cguess[i] == Ccorrectnumber[tablechoice[i]-1] and cwager[i] >= Cminbet:
-                    Cplayermoneychanges.append(Craps.payouts(Ccorrectnumber[tablechoice[i]-1])*cwager[i])
-                    Ccasinomoneychanges.append(-Craps.payouts(Ccorrectnumber[tablechoice[i]-1])*cwager[i])
+                    Cplayermoneychanges.append(craps.payouts(Ccorrectnumber[tablechoice[i]-1])*cwager[i])
+                    Ccasinomoneychanges.append(-craps.payouts(Ccorrectnumber[tablechoice[i]-1])*cwager[i])
                 else:
                     Cplayermoneychanges.append(-cwager[i])
                     Ccasinomoneychanges.append(cwager[i])
@@ -259,7 +257,7 @@ def CasinoSimulation(nights, pnumber, casinoday1cash, nbartend, nroulette, ncrap
             #The cash from this round is added to the casino stash
             casinocash += TCasinoNightChange
             #Players earn their money now to be used in future rounds
-            for i in range(0, len(plist)):
+            for i in range(0,len(plist)):
                 PlayerMoney[i] += Rplayermoneychanges[i]
                 PlayerMoney[i] += Cplayermoneychanges[i]
         #The bartenders are paid $200. the cost of the bartenders is the nightly wage times the number of bartenders

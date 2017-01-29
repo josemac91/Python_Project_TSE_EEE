@@ -7,19 +7,19 @@ random.seed(3456)
 #Scaling the payoffs based on probabilites so that the expected outcomes are the same across possible guesses
 def payouts(roll):
     #The odds of rolling 2 or 12 is 1/36. the payoff is then $36 for every dollar bet IF 100% goes back to players
-    if roll == 2 or roll == 12:
+    if roll==2 or roll==12:
         pomult = 36
     #For 3 and 11, the odds are 2/36 or 1/18. Thus the payoff is $18 for every dollar
-    elif roll == 3 or roll == 11:
+    elif roll==3 or roll==11:
         pomult = 18
     #This continues the pattern, but odds are now 3/36
-    elif roll == 4 or roll == 10:
+    elif roll==4 or roll==10:
         pomult = 12
     #Odds are 4/36 now
-    elif roll == 5 or roll == 9:
+    elif roll==5 or roll==9:
         pomult = 9
     #Odds are 5/36
-    elif roll == 6 or roll == 8:
+    elif roll==6 or roll==8:
         pomult = 7.2
     #This is for the roll equaling 7 which has probability of 6/36
     else:
@@ -37,7 +37,7 @@ def AboveMinimum(dollars):
     #Loop for each player
     for i in range(0, len(dollars)):
         #If the bet is above the min, it returns TRUE
-        if (dollars[i] > minimumbets):
+        if (dollars[i] >= minimumbets):
             boollist.append(True)
         #If not, it is an invalid bet and receives the FALSE response
         else:
@@ -116,5 +116,24 @@ def SimulateGame(guesses, wagers):
         else:
             nguess.append(0)
     #Run the roll the dices based on the new guesses (nguess)
-    out = RollTheDices(nguess, wagers)
+    out=RollTheDices(nguess, wagers)
     return(out)
+
+#Testing that casino makes 10% profit from payoffs
+def ProfitTest():
+    #Craps guesses
+    crapguesses = [7, 9, 2, 11, 3]
+    #The wagers for craps
+    crapbets = [50, 70, 30, 40, 50]
+    #Setting the player earnings to 0 and chips too
+    playerearnings = 0
+    chips = 0
+    #Running the code 10000 times
+    for i in range(0, 10000):
+        #Chips is the sum of the wagers for each simulation
+        chips += sum(crapbets)
+        profittest=SimulateGame(crapguesses,crapbets)
+        #The player earnings equals the sum of the earnings for each player
+        playerearnings += sum(profittest[1])
+    #This number should be close to 0.9
+    print(playerearnings/chips)
