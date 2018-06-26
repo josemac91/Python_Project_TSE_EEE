@@ -1,3 +1,1 @@
-# Python_Project_TSE_EEE
-Assignment for the class Programming in Python, Master in Econometrics and Empirical Economics, Toulouse School of Economics.
-Done along classmate Ted Gertner
+Assignment for the class Programming in Python for the Master in Econometrics and Empirical Economics (EEE) at the Toulouse School of Economics (TSE). Done along classmate Ted Gertner.
